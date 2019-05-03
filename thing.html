@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Buy Potaoes</title>
+<style>
+	body {
+		background-color: chocolate;
+		font-family: sans-serif;
+	}
+</style>
+</head>
+<body>
+	<h1>Buy Potaoes</h1>
+	<hr>
+	<button onclick = "lessMoney(Math.random() * 5)">Buy Potatoes</button>
+	<button onclick = "sell()">Sell Potatoes</button>
+	<p id="main"></p>
+	<p id="pots"></p>
+	<p id = "boughtFor"></p>
+	<p id = "sold"></p>
+	<p id="tax"></p>
+	<script type = "text/javascript">
+	var money = 50;
+	var potatoes = 0;
+	document.getElementById("main").innerHTML = "$" + money;
+	document.getElementById("pots").innerHTML = "Potatoes: " + potatoes;
+	function lessMoney(moneyToSubtract)
+	{
+		if(moneyToSubtract <= 0)
+		{
+			moneyToSubtract + 1;
+		}
+
+		moneyToSubtract = Math.floor(moneyToSubtract * 100) / 100;
+
+		if(money - moneyToSubtract < 0)
+		{
+			alert("Not enough money!");
+		} else {
+		money -= moneyToSubtract;
+		potatoes += 1;
+		document.getElementById("main").innerHTML = "$" + Math.floor(money * 100) / 100;
+		document.getElementById("pots").innerHTML = "Potatoes: " + potatoes;
+		document.getElementById("boughtFor").innerHTML = "You just bought a potato for $" + moneyToSubtract;
+		}	
+	}
+
+	function sell()
+	{
+		if(potatoes <= 0)
+		{
+			alert("You have to have potatoes to sell potatoes!");
+		} else {
+			soldFor = Math.floor(Math.random() * 10);
+			salesTax = soldFor * .09;
+			moneyGained = Math.floor((soldFor - salesTax) * 100) / 100;
+			money += moneyGained
+			potatoes -= 1;
+			money = Math.floor(money * 100) / 100;
+			document.getElementById("main").innerHTML = "$" + money;
+			document.getElementById("pots").innerHTML = "Potatoes: " + potatoes;
+			if(soldFor > 0)
+			{
+				document.getElementById("sold").innerHTML = "The potato was sold for $" + moneyGained;
+				document.getElementById("tax").innerHTML = "Sales tax was $" + Math.floor(salesTax * 100) / 100;
+			} else {
+				document.getElementById("sold").innerHTML = "Oh No! The potato market crashed, and the potato was given away for free!";
+			}
+		}
+	}
+	</script>
+</body>
+</html>
